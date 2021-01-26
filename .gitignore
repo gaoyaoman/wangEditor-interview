@@ -1,3 +1,6 @@
+#IED OPTION
+.idea/
+target/
 # Logs
 logs
 *.log
