@@ -4,13 +4,22 @@ interface MenuItem {
   options: [] | any
 }
 
-function menuItemHandler(menuItem: MenuItem): DocumentFragment {
+function menuItemHandler(menuItem: MenuItem): HTMLElement {
   const {label, name, options} = menuItem;
-  let container = document.createDocumentFragment()
-  for (let item of options.values()) {
+
+  let container = document.createElement('div');
+  container.className = 'menu__item';
+
+  let menuLabel = document.createElement('div')
+  menuLabel.innerHTML = label;
+  menuLabel.className = 'menu__button'
+  container.appendChild(menuLabel);
+  let list = document.createElement('div')
+  for (let item of options) {
     let menuItem = document.createElement('div');
     menuItem.innerHTML = item.name;
     menuItem.dataset.value = item.value;
+    menuItem.className = 'menu__option'
     container.appendChild(menuItem);
   }
   return container;
@@ -19,7 +28,7 @@ function menuItemHandler(menuItem: MenuItem): DocumentFragment {
 function initMenu(menus: MenuItem[]): HTMLElement {
   const menu: HTMLDivElement | null = document.createElement('div');
   menu.id = 'editor__menu';
-  let item = document.createElement('div');
+  let item = document.createDocumentFragment()
   for (let menuItem of menus) {
     item.appendChild(menuItemHandler(menuItem))
   }
@@ -47,12 +56,12 @@ class Editor {
     this.lastAddress = ''
     this.menu = [
       {
-        label: 'Bold',
+        label: 'B',
         name: 'BOLD',
         options: []
       },
       {
-        label: 'Title',
+        label: 'S',
         name: 'FONT_SIZE',
         options: [
           {
@@ -82,7 +91,7 @@ class Editor {
         ]
       },
       {
-        label: 'Color',
+        label: 'C',
         name: 'COLOR',
         options: [
           {

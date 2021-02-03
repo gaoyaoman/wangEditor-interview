@@ -21,11 +21,12 @@ module.exports = {
 				exclude: /node\_modules/
 			},
 			{
-				test:/\.(css|less)$/i,
+				test:/\.(css|less|scss)$/i,
 				use:[
 					"style-loader",
 					"css-loader",
 					"postcss-loader",
+					"sass-loader",
 					// "less-loader",
 					{
 						loader:"less-loader",
